@@ -60,11 +60,11 @@
 			children = (
 				3CBAA95E208B662500B30775 /* Model */,
 				3CBAA94C208B660C00B30775 /* AppDelegate.swift */,
+				3CBAA963208B68B600B30775 /* TableViewController.swift */,
 				3CBAA950208B660C00B30775 /* Main.storyboard */,
 				3CBAA953208B661200B30775 /* Assets.xcassets */,
 				3CBAA955208B661200B30775 /* LaunchScreen.storyboard */,
 				3CBAA958208B661200B30775 /* Info.plist */,
-				3CBAA963208B68B600B30775 /* TableViewController.swift */,
 			);
 			path = ToDoList;
 			sourceTree = "<group>";
