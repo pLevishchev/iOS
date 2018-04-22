@@ -33,10 +33,9 @@ class TableViewCell: UITableViewCell {
     
     func setCheckButton() {
         if todoInCell!.isComplete{
-            buttonCheck.setImage(#imageLiteral(resourceName: "checkbox_checked.png"), for: .normal)
-        } else {
             buttonCheck.setImage(#imageLiteral(resourceName: "checkbox_unchecked.png"), for: .normal)
-
+        } else {
+            buttonCheck.setImage(#imageLiteral(resourceName: "checkbox_checked.png"), for: .normal)
         }
     }
     

@@ -29,5 +29,6 @@ var rootItem: ToDoItem?
         rootItem.dictionary.write(toFile: pathForSaveData, atomically: true)
         UIApplication.shared.applicationIconBadgeNumber =
             rootItem.countUncompletedSubTask
-        }
+    }
+        
 }

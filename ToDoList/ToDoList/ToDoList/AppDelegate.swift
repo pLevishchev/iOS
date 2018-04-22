@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         loadData()
         
+        let settings = UIUserNotificationSettings(types: [.badge], categories: nil)
+        UIApplication.shared.registerUserNotificationSettings(settings)
+        
         return true
     }
 
