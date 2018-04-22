@@ -45,19 +45,19 @@ class TableViewController: UITableViewController {
         if toDoItemCurrent == nil{
             toDoItemCurrent = rootItem
         }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+       navigationItem.title = toDoItemCurrent?.name
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -72,13 +72,17 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let  itemForCell = toDoItemCurrent?.subItems[indexPath.row]
-        cell.textLabel?.text = itemForCell?.name
+        let  itemForCell = toDoItemCurrent!.subItems[indexPath.row]
+        cell.textLabel?.text = itemForCell.name
+        
+        if itemForCell.subItems.count != 0{
+            cell.detailTextLabel?.text = String(itemForCell.subItems.count) + " subItems"
+        } else {
+            cell.detailTextLabel?.text = ""
+        }
         
         return cell
     }
-    
-
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -100,7 +104,18 @@ class TableViewController: UITableViewController {
         }    
     }
  
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let subItem = toDoItemCurrent?.subItems[indexPath.row]
+        let tvc = storyboard?.instantiateViewController(withIdentifier: "todoSID")
+            as! TableViewController
+        
+        tvc.toDoItemCurrent = subItem
+        
+        navigationController?.pushViewController(tvc, animated: true)
+    }
+ 
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
