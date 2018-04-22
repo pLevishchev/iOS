@@ -46,6 +46,46 @@ class TableViewController: UITableViewController {
             toDoItemCurrent = rootItem
         }
        navigationItem.title = toDoItemCurrent?.name
+        
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
+                                                                      action: #selector(handleLongPress))
+        longPressGestureRecognizer.minimumPressDuration = 1
+        tableView.addGestureRecognizer(longPressGestureRecognizer)
+    }
+    
+    @objc func handleLongPress(longPress: UILongPressGestureRecognizer){
+        let pointOfTouch = longPress.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: pointOfTouch)
+        
+        if longPress.state == .began{
+            if let indexPath = indexPath{
+                let toDoItem = toDoItemCurrent?.subItems[indexPath.row]
+                
+                let alert = UIAlertController(title: "Edit item", message: "",
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                
+                alert.addTextField { (textField) in
+                    textField.placeholder = "ToDo item"
+                    textField.text = toDoItem?.name
+                }
+                
+                let alertActionCreate = UIAlertAction(title: "Update", style: UIAlertActionStyle.default, handler: { (alertAction) in
+                    if alert.textFields![0].text != "" {
+                        toDoItem?.name = alert.textFields![0].text!
+                        self.tableView.reloadData()
+                        saveDate()
+                    }
+                })
+                
+                let alertActionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (alert) in
+                })
+                
+                alert.addAction(alertActionCreate)
+                alert.addAction(alertActionCancel)
+                
+                present(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
