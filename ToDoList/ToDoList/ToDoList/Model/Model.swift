@@ -10,7 +10,6 @@ import UIKit
 
 var pathForSaveData: String {
     let path  = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] + "data.plist"
-    print(path)
     
     return path
 }
