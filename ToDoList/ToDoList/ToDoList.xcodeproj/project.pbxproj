@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C543EB6208CA62B00663A60 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C543EB5208CA62B00663A60 /* TableViewCell.swift */; };
+		3CB33F2F208CB8990098A6C4 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CB33F2D208CB8990098A6C4 /* checkbox_unchecked.png */; };
+		3CB33F30208CB8990098A6C4 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CB33F2E208CB8990098A6C4 /* checkbox_checked.png */; };
 		3CBAA94D208B660C00B30775 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBAA94C208B660C00B30775 /* AppDelegate.swift */; };
 		3CBAA952208B660C00B30775 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CBAA950208B660C00B30775 /* Main.storyboard */; };
 		3CBAA954208B661200B30775 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CBAA953208B661200B30775 /* Assets.xcassets */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C543EB5208CA62B00663A60 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		3CB33F2D208CB8990098A6C4 /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
+		3CB33F2E208CB8990098A6C4 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
 		3CBAA949208B660C00B30775 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CBAA94C208B660C00B30775 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CBAA951208B660C00B30775 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -39,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3CB33F1E208CB73C0098A6C4 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3CB33F2E208CB8990098A6C4 /* checkbox_checked.png */,
+				3CB33F2D208CB8990098A6C4 /* checkbox_unchecked.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		3CBAA940208B660C00B30775 = {
 			isa = PBXGroup;
 			children = (
@@ -61,7 +76,9 @@
 				3CBAA95E208B662500B30775 /* Model */,
 				3CBAA94C208B660C00B30775 /* AppDelegate.swift */,
 				3CBAA963208B68B600B30775 /* TableViewController.swift */,
+				3C543EB5208CA62B00663A60 /* TableViewCell.swift */,
 				3CBAA950208B660C00B30775 /* Main.storyboard */,
+				3CB33F1E208CB73C0098A6C4 /* Images */,
 				3CBAA953208B661200B30775 /* Assets.xcassets */,
 				3CBAA955208B661200B30775 /* LaunchScreen.storyboard */,
 				3CBAA958208B661200B30775 /* Info.plist */,
@@ -137,6 +154,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CBAA957208B661200B30775 /* LaunchScreen.storyboard in Resources */,
+				3CB33F2F208CB8990098A6C4 /* checkbox_unchecked.png in Resources */,
+				3CB33F30208CB8990098A6C4 /* checkbox_checked.png in Resources */,
 				3CBAA954208B661200B30775 /* Assets.xcassets in Resources */,
 				3CBAA952208B660C00B30775 /* Main.storyboard in Resources */,
 			);
@@ -149,6 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C543EB6208CA62B00663A60 /* TableViewCell.swift in Sources */,
 				3CBAA960208B667000B30775 /* ToDoItem.swift in Sources */,
 				3CBAA94D208B660C00B30775 /* AppDelegate.swift in Sources */,
 				3CBAA962208B678B00B30775 /* Model.swift in Sources */,

@@ -110,16 +110,12 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
+                                                 for: indexPath) as! TableViewCell
 
         let  itemForCell = toDoItemCurrent!.subItems[indexPath.row]
-        cell.textLabel?.text = itemForCell.name
         
-        if itemForCell.subItems.count != 0{
-            cell.detailTextLabel?.text = String(itemForCell.subItems.count) + " subItems"
-        } else {
-            cell.detailTextLabel?.text = ""
-        }
+        cell.initCell(toDo: itemForCell)
         
         return cell
     }
