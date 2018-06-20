@@ -45,19 +45,59 @@ class TableViewController: UITableViewController {
         if toDoItemCurrent == nil{
             toDoItemCurrent = rootItem
         }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+       navigationItem.title = toDoItemCurrent?.name
+        
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
+                                                                      action: #selector(handleLongPress))
+        longPressGestureRecognizer.minimumPressDuration = 1
+        tableView.addGestureRecognizer(longPressGestureRecognizer)
     }
-
+    
+    @objc func handleLongPress(longPress: UILongPressGestureRecognizer){
+        let pointOfTouch = longPress.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: pointOfTouch)
+        
+        if longPress.state == .began{
+            if let indexPath = indexPath{
+                let toDoItem = toDoItemCurrent?.subItems[indexPath.row]
+                
+                let alert = UIAlertController(title: "Edit item", message: "",
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                
+                alert.addTextField { (textField) in
+                    textField.placeholder = "ToDo item"
+                    textField.text = toDoItem?.name
+                }
+                
+                let alertActionCreate = UIAlertAction(title: "Update", style: UIAlertActionStyle.default, handler: { (alertAction) in
+                    if alert.textFields![0].text != "" {
+                        toDoItem?.name = alert.textFields![0].text!
+                        self.tableView.reloadData()
+                        saveDate()
+                    }
+                })
+                
+                let alertActionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (alert) in
+                })
+                
+                alert.addAction(alertActionCreate)
+                alert.addAction(alertActionCancel)
+                
+                present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -70,15 +110,15 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
+                                                 for: indexPath) as! TableViewCell
 
-        let  itemForCell = toDoItemCurrent?.subItems[indexPath.row]
-        cell.textLabel?.text = itemForCell?.name
+        let  itemForCell = toDoItemCurrent!.subItems[indexPath.row]
+        
+        cell.initCell(toDo: itemForCell)
         
         return cell
     }
-    
-
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -100,7 +140,18 @@ class TableViewController: UITableViewController {
         }    
     }
  
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let subItem = toDoItemCurrent?.subItems[indexPath.row]
+        let tvc = storyboard?.instantiateViewController(withIdentifier: "todoSID")
+            as! TableViewController
+        
+        tvc.toDoItemCurrent = subItem
+        
+        navigationController?.pushViewController(tvc, animated: true)
+    }
+ 
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

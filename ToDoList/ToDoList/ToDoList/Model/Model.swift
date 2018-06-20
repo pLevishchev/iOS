@@ -25,5 +25,10 @@ var rootItem: ToDoItem?
     }
     
     func saveDate(){
-        rootItem?.dictionary.write(toFile: pathForSaveData, atomically: true)
+        if let rootItem = rootItem{
+        rootItem.dictionary.write(toFile: pathForSaveData, atomically: true)
+        UIApplication.shared.applicationIconBadgeNumber =
+            rootItem.countUncompletedSubTask
+    }
+        
 }
